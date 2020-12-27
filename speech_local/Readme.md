@@ -4,4 +4,4 @@ Load app_webserver.ino to esp8266
 
 Connect to wifi "ESP8266 Access Point"
 
-Open index.html and in microfone speak "on" or "off" ... the internal led of esp8266 need to open and close
+Open index.html and in microfone speak "on" or "off" ... the internal led of esp8266 will open or close
