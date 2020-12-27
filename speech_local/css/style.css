@@ -1,0 +1,11 @@
+body {
+  background-color: orangered;
+}
+
+.words {
+  width: 300px;
+  height: auto;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 25px;
+}
