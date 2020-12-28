@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Speech Recognition</title>
+
+    <style>
+	body {
+  background-color: orangered;
+}
+
+.words {
+  width: 300px;
+  height: auto;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 25px;
+}
+	</style>
+  </head>
+  <body>
+    <div class="words"></div>
+	<button id="on" onclick="on();">on</button><br>
+<button id="off" onclick="off();">off</button>
+<a id="onl" href="http://192.168.1.108/on">on</a>
+<a id="offl" href="http://192.168.1.108/off">off</a>
+<form action="http://192.168.1.108/on">
+    <input type="submit" value="ON" />
+</form>
+<form action="http://192.168.1.108/off">
+    <input type="submit" value="OFF" />
+</form>
+
+    <script>
+	const words = document.querySelector('.words');
+let p = document.createElement('p');
+words.appendChild(p);
+	  var xhttp = new XMLHttpRequest();
+	  
+	function on(){
+document.getElementById("onl").click();
+	   }
+	   
+	   	function off(){
+document.getElementById("offl").click();
+	   }
+
+window.SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
+
+const recognition = new SpeechRecognition();
+recognition.interimResults = true;
+recognition.lang = 'en-EN';
+
+recognition.addEventListener('result', e => {
+  const transcript = Array.from(e.results)
+    .map(result => result[0].transcript)
+    .join('');
+
+  p.textContent = transcript;
+  if (e.results[0].isFinal) {
+    p = document.createElement('p');
+    words.appendChild(p);
+
+    if (transcript.includes('еркебулан')) {
+      console.log('+unicorn');
+    }
+	
+	    if (transcript.includes('on')) {
+      console.log('+on');
+	      xhttp.open("GET", "http://192.168.1.108/on", true);
+  xhttp.send();
+    }
+	
+	    if (transcript.includes('off')) {
+      console.log('+off');
+	      xhttp.open("GET", "http://192.168.1.108/off", true);
+  xhttp.send();
+    }
+	/*
+	  var xhttp = new XMLHttpRequest();
+  function on(){
+    xhttp.open("GET", "http://192.168.4.1/on", true);
+  xhttp.send();
+   }
+     function off(){
+    xhttp.open("GET", "http://192.168.4.1/off", true);
+  xhttp.send();
+   }
+	
+	*/
+  }
+});
+
+recognition.addEventListener('end', recognition.start);
+recognition.start();
+	</script>
+  </body>
+</html>
