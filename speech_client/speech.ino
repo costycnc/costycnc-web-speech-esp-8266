@@ -81,7 +81,7 @@ String s="<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\" />"
 
 //SSID and Password of your WiFi router
 const char* ssid = "Wind3 HUB-315F35";
-const char* password = "costycnccostycnc";
+const char* password = "xxxxxxxxxxxxxxxx";
 
 //Declare a global object variable from the ESP8266WebServer class.
 ESP8266WebServer server(80); //Server on port 80
